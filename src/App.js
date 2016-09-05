@@ -1,24 +1,23 @@
 import React from 'react';
 import styles from './App.css';
+import { connect } from 'react-redux';
+import { INCREMENT, DECREMENT } from './actions';
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = { count: 0 };
-  }
-
-  increment() {
-    this.setState({
-      count: this.state.count + 1
-    });
-  }
-
+export class App extends React.Component {
   render() {
     return (
       <div className={styles.app}>
-        <p>{ this.state.count }</p>
-        <button onClick={() => this.increment()}>Increment</button>
+        <p>{ this.props.counter }</p>
+        <button onClick={() => this.props.increment()}>Increment</button>
       </div>
     )
   }
 }
+
+export default connect(
+  (state) => ({ counter: state.counter }),
+  (dispatch) => ({
+    increment() { return dispatch({ type: INCREMENT }) },
+    decrement() { return dispatch({ type: DECREMENT }) },
+  })
+)(App);
