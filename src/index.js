@@ -2,12 +2,17 @@ import App from './App';
 import React from 'react';
 import { render } from 'react-dom';
 
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import appReducer from './reducers';
 
-let store = createStore(appReducer);
+// Logger with default options
+import logger from 'redux-logger'
+const store = createStore(
+  appReducer,
+  applyMiddleware(logger)
+)
 
 render(
   <Provider store={store}>
@@ -15,5 +20,3 @@ render(
   </Provider>,
   document.getElementById('root')
 );
-
-
