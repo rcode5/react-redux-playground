@@ -1,6 +1,9 @@
 import { INCREMENT, DECREMENT, UPDATE_STORE } from './actions';
 
 const defaultState = {
+  a: 1, 
+  b: 'reducer',
+  c: null,
   counters: {
     1: { count: 0 },
     2: { count: 0 }

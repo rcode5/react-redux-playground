@@ -13,9 +13,7 @@ class Container extends Component {
     return (
         <div className="input-group" key={key}>
         <label>{key}</label>
-        <input type="text" value={value} onChange={
-          (e) => this.props.onChange({ [key]: e.target.value })
-        } />
+        <input type="text" />
         </div>
     );
   }
@@ -36,8 +34,8 @@ class Container extends Component {
         <pre><code>{ppJson(this.props)}</code></pre>
         <form>{ renderInputs() }</form>
         </div>
-        <ConnectedSub1 onChange={this.props.onChange}/>
-        <Sub2  {...this.props} />
+        <ConnectedSub1 />
+        <ConnectedSub2  />
         </div>
         </div>
     );
@@ -69,6 +67,11 @@ class Sub1 extends Component {
   }
 }
 
+const sub1StateToProps = ({a,b,c}) => {
+  return {a, b, c};
+};
+
+
 class Sub2 extends Component {
   render() {
     return (
@@ -78,7 +81,7 @@ class Sub2 extends Component {
         <pre><code>{ppJson(this.props)}</code></pre>
         <div className="input-group">
         <label>b</label>
-        <input type="text" value={this.props.a} onChange={
+        <input type="text" value={this.props.b} onChange={
           (e) => this.props.onChange({ b: e.target.value })
         } />
         </div>
@@ -94,8 +97,16 @@ const ConnectedContainer = connect(
     onChange(data) { return dispatch({ type: UPDATE_STORE, data: data}) }
   })
 )(Container);
-const ConnectedSub1 = connect(mapStateToProps)(Sub1);
-const ConnectedSub2 = connect(mapStateToProps)(Sub2);
+const ConnectedSub1 = connect(sub1StateToProps,
+  (dispatch) => ({
+    onChange(data) { return dispatch({ type: UPDATE_STORE, data: data}) }
+  })
+)(Sub1);
+const ConnectedSub2 = connect(mapStateToProps,
+  (dispatch) => ({
+    onChange(data) { return dispatch({ type: UPDATE_STORE, data: data}) }
+  })
+)(Sub2);
 
 class DisconnectedCounter extends Component {
   render() {
@@ -115,9 +126,9 @@ class DisconnectedCounter extends Component {
 };
 
 const mapCounterStateToProps = state => {
-  console.log("counterstate", state);
-  return state;
-}
+    console.log("counterstate", state);
+    return state;
+  }
 
 const Counter = connect(mapCounterStateToProps)(DisconnectedCounter);
 
