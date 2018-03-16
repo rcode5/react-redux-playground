@@ -1,3 +1,44 @@
+body, .wrapper {
+  margin: 0px;
+  padding: 0;
+}
+label + input {
+  margin-left: 10px;
+}
+input + label {
+  margin-left: 20px;
+}
+input + button {
+  margin-left: 20px;
+}
+input {
+  font-size: 16px;
+  padding: 16px;
+}
+button {
+  font-size: 16px;
+  padding:16px;
+}
+
+.app,
+.container,
+.sub1,
+.sub2 {
+  font-family: courier;
+  padding: 20px;
+  margin: 0px;
+}
+
 .app {
   color: red;
+}
+
+.container {
+  background-color: rgba(100,100,100, 0.2);
+}
+.sub1 {
+  background-color: rgba(red, 0.2);
+}
+.sub2 {
+  background-color: rgba(purple, 0.2);
 }

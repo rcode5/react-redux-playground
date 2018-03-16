@@ -1,5 +1,3 @@
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
-
-
-
+export const UPDATE_STORE = "UPDATE_STORE";

@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT } from './actions';
+import { INCREMENT, DECREMENT, UPDATE_STORE } from './actions';
 
 const defaultState = {
   counters: {
@@ -10,6 +10,10 @@ const defaultState = {
 export default (state = defaultState, action) => {
   const key = action.data;
   switch(action.type) {
+  case UPDATE_STORE:
+    console.log('update', action.data);
+    const {data} = action;
+    return {...state, ...data };
   case INCREMENT:
     return {
       ...state,
